@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
 
             $table->foreignId('user_type_id')
+                  ->default(2) 
                   ->constrained('user_types')
                   ->restrictOnDelete();
 
@@ -19,12 +20,9 @@ return new class extends Migration {
             $table->string('password');
             $table->timestamps();
         });
-
-       
     }
 
     public function down(): void {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('user_types');
     }
 };
