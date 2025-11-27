@@ -9,8 +9,8 @@ use App\Http\Controllers\Admin\UserController as UserAdminController;
 Route::group(["prefix" => "v0.1"], function(){
     //Authenticated Routes
     Route::group(["prefix" => "user"], function(){
-        Route::get('/users/{id?}', [TaskController::class, "getAllTasks"])->name("user-listing");
-        Route::post('/add_update_user/{id?}', [TaskController::class, "addOrUpdateUser"]);
+        Route::get('/users/{id?}', [UserController::class, "getAllUsers"]);
+        Route::post('/add_update_user/{id?}', [UserController::class, "addOrUpdateUser"]);
     });
 
     //Authenticated Routes
