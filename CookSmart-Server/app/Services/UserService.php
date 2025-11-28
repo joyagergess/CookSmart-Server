@@ -37,4 +37,17 @@ class UserService
         $user->save();
         return $user;
     }
+    
+   public static function deleteUser($id){
+                                       
+    $user = User::find($id);
+
+    if (!$user) {
+        return null;
+    }
+
+    $user->delete();
+    return true;
+  }
+
 }

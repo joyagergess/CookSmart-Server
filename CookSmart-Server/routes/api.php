@@ -11,6 +11,8 @@ Route::group(["prefix" => "v0.1"], function(){
     Route::group(["prefix" => "user"], function(){
         Route::get('/users/{id?}', [UserController::class, "getAllUsers"]);
         Route::post('/add_update_user/{id?}', [UserController::class, "addOrUpdateUser"]);
+        Route::post('/delete_user', [UserController::class, "deleteUser"]);
+
     });
 
     //Authenticated Routes

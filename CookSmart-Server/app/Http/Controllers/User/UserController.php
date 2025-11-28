@@ -24,4 +24,14 @@ class UserController extends Controller
 
         return $this->responseJSON($result);
     }
+
+    function deleteUser(Request $request){
+        $id=$request->id;
+
+        $result=UserService::deleteUser($id);
+        if (!$result){
+            return $this->responseJson(null,"failure",404);
+        }
+        return $this->responseJson("user deleted");
+    }
 }
