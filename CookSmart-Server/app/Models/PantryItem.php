@@ -14,13 +14,13 @@ class PantryItem extends Model
         'expiry_date'
     ];
 
-    public function household()
-    {
-        return $this->belongsTo(Household::class, 'household_id');
-    }
-
     public function ingredient()
     {
-        return $this->belongsTo(Ingredient::class, 'ingredient_id');
+        return $this->belongsTo(Ingredient::class);
+    }
+
+    public function household()
+    {
+        return $this->belongsTo(Household::class);
     }
 }

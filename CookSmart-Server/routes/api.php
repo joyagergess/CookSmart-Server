@@ -5,6 +5,12 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserTypeController;
 use App\Http\Controllers\User\HouseholdController;
 use App\Http\Controllers\User\HouseholdMemberController;
+use App\Http\Controllers\User\IngredientController;
+use App\Http\Controllers\User\PantryItemController;
+
+
+
+
 
 use App\Http\Controllers\Admin\UserController as UserAdminController;
 
@@ -34,12 +40,32 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get('/list/{household_id}', [HouseholdMemberController::class, "listByHousehold"]);
         Route::post('/leave', [HouseholdMemberController::class, "leave"]);
 
-});
-
-
-
-
-Route::group(["prefix" => "admin"], function () {
-        Route::post('/delete_tasks', [UserAdminController::class, "deleteAllTasks"]);
     });
+
+    Route::group(["prefix" => "ingredients"], function () {
+        Route::get('/{id?}', [IngredientController::class, "list"]);
+        Route::post('/add_update/{id?}', [IngredientController::class, "addOrUpdate"]);
+        Route::post('/delete', [IngredientController::class, "delete"]);
+    });
+    
+    Route::group(["prefix" => "pantry"], function () {
+        Route::get('/list/{household_id}', [PantryItemController::class, "list"]);
+        Route::post('/add_update/{id?}', [PantryItemController::class, "addOrUpdate"]);
+        Route::post('/delete', [PantryItemController::class, "delete"]);
+    
+        Route::post('/increase', [PantryItemController::class, "increase"]);
+        Route::post('/decrease', [PantryItemController::class, "decrease"]);
+    
+        Route::get('/expiring_soon/{household_id}', [PantryItemController::class, "expiringSoon"]);
+        Route::get('/low_quantity/{household_id}', [PantryItemController::class, "lowQuantity"]);
+    });
+
+
+    
+
+
+
+        Route::group(["prefix" => "admin"], function () {
+        Route::post('/delete_tasks', [UserAdminController::class, "deleteAllTasks"]);
+     });
 });

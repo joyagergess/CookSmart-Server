@@ -51,6 +51,7 @@ class HouseholdMemberService
         $exists = HouseholdMember::where('household_id', $household_id)
                                  ->where('user_id', $user_id)
                                  ->first();
+                                 
         if ($exists) return ["error" => "User already a member"];
 
         $member = new HouseholdMember();

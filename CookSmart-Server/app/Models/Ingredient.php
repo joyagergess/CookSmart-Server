@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ingredient extends Model
 {
-    protected $fillable = ['name', 'default_unit'];
+    public $timestamps = false;
 
-    public function pantryItems()
-    {
-        return $this->hasMany(PantryItem::class);
-    }
+    protected $fillable = [
+        'name'
+    ];
 }
