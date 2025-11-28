@@ -8,10 +8,8 @@ use App\Http\Controllers\User\HouseholdMemberController;
 use App\Http\Controllers\User\IngredientController;
 use App\Http\Controllers\User\PantryItemController;
 use App\Http\Controllers\User\RecipeController;
-
-
-
-
+use App\Http\Controllers\User\MealPlanController;
+use App\Http\Controllers\User\MealPlanEntryController;
 
 
 use App\Http\Controllers\Admin\UserController as UserAdminController;
@@ -72,7 +70,15 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::post('/add_ingredient', [RecipeController::class, "addIngredient"]);
         Route::get('/ingredients/{recipe_id}', [RecipeController::class, "listIngredients"]);
    });
- 
+
+     Route::group(["prefix" => "meal_plan"], function () {
+
+        Route::post('/get_or_create', [MealPlanController::class, "getOrCreate"]);
+        Route::get('/entries/{meal_plan_id}', [MealPlanController::class, "listEntries"]);
+        Route::post('/add_entry', [MealPlanEntryController::class, "add"]);
+        Route::post('/remove_entry', [MealPlanEntryController::class, "remove"]);
+});
+
     
 
 

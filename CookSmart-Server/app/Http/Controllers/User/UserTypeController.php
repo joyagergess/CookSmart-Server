@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\UserTypeService;
 
-class UserTypeController extends Controller
-{
-    public function getAll($id = null)
-    {
+class UserTypeController extends Controller{
+    
+    public function getAll($id = null){
         $result = UserTypeService::getUserTypes($id);
         return $this->responseJSON($result);
     }
 
-    public function create(Request $request)
-    {
+    public function create(Request $request){
         $result = UserTypeService::create($request->all());
 
         if (!$result) {
@@ -25,8 +23,7 @@ class UserTypeController extends Controller
         return $this->responseJSON($result);
     }
 
-    public function delete(Request $request)
-    {
+    public function delete(Request $request){
         $id = $request->id;
 
         $result = UserTypeService::delete($id);

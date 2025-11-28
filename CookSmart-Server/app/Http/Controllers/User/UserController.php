@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 
-class UserController extends Controller
-{
+class UserController extends Controller{
     function getAllUsers($id = null)
     {
         $result = UserService::getUsers($id);
         return $this->responseJSON($result);
     }
 
-    function addOrUpdateUser(Request $request, $id = "add")
-    {
+    function addOrUpdateUser(Request $request, $id = "add"){
         $result = UserService::createOrUpdate($request->all(), $id);
 
         if (!$result) {

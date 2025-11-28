@@ -6,16 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\HouseholdService;
 
-class HouseholdController extends Controller
-{
-    public function getAll($id = null)
-    {
+class HouseholdController extends Controller{
+    public function getAll($id = null){
         $result = HouseholdService::getHouseholds($id);
         return $this->responseJSON($result);
     }
 
-    public function addOrUpdate(Request $request, $id = "add")
-    {
+    public function addOrUpdate(Request $request, $id = "add") {
         $result = HouseholdService::createOrUpdate($request->all(), $id);
 
         if (!$result) {
@@ -25,8 +22,7 @@ class HouseholdController extends Controller
         return $this->responseJSON($result);
     }
 
-    public function delete(Request $request)
-    {
+    public function delete(Request $request) {
         $result = HouseholdService::deleteHousehold($request->id);
 
         if (!$result) {
