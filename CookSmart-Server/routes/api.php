@@ -7,6 +7,8 @@ use App\Http\Controllers\User\HouseholdController;
 use App\Http\Controllers\User\HouseholdMemberController;
 use App\Http\Controllers\User\IngredientController;
 use App\Http\Controllers\User\PantryItemController;
+use App\Http\Controllers\User\RecipeController;
+
 
 
 
@@ -60,7 +62,17 @@ Route::group(["prefix" => "v0.1"], function(){
         Route::get('/low_quantity/{household_id}', [PantryItemController::class, "lowQuantity"]);
     });
 
+    Route::group(["prefix" => "recipes"], function () {
 
+        Route::get('/list/{household_id}', [RecipeController::class, "list"]);
+        Route::get('/get/{id}', [RecipeController::class, "get"]);
+        Route::post('/add_update/{id?}', [RecipeController::class, "addOrUpdate"]);
+        Route::post('/delete', [RecipeController::class, "delete"]);
+    
+        Route::post('/add_ingredient', [RecipeController::class, "addIngredient"]);
+        Route::get('/ingredients/{recipe_id}', [RecipeController::class, "listIngredients"]);
+   });
+ 
     
 
 
