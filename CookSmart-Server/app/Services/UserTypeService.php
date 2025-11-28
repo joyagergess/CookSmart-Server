@@ -6,8 +6,7 @@ use App\Models\UserType;
 
 class UserTypeService
 {
-    public static function getUserTypes($id = null)
-    {
+    public static function getUserTypes($id = null) {
         if (!$id) {
             return UserType::all();
         }
@@ -15,8 +14,7 @@ class UserTypeService
         return UserType::find($id);
     }
 
-    public static function create($data)
-    {
+    public static function create($data){
         $type = new UserType;
         $type->name = $data['name'];
         $type->save();
@@ -24,8 +22,7 @@ class UserTypeService
         return $type;
     }
 
-    public static function delete($id)
-    {
+    public static function delete($id)  {
         $type = UserType::find($id);
 
         if (!$type) return null;

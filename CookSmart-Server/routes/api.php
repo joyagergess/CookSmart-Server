@@ -12,7 +12,7 @@ use App\Http\Controllers\User\MealPlanController;
 use App\Http\Controllers\User\MealPlanEntryController;
 use App\Http\Controllers\User\ShoppingListItemController;
 use App\Http\Controllers\User\ShoppingListController;
-;
+use App\Http\Controllers\User\ExpenseController;
 
 
 use App\Http\Controllers\Admin\UserController as UserAdminController;
@@ -93,6 +93,14 @@ Route::group(["prefix" => "v0.1"], function(){
        Route::post('/delete', [ShoppingListItemController::class, "delete"]);
        Route::post('/toggle', [ShoppingListItemController::class, "toggle"]);
    });
+
+    Route::group(["prefix" => "expenses"], function () {
+
+       Route::get('/{household_id}', [ExpenseController::class, "list"]);
+       Route::get('/week/{household_id}/{week_start}',[ExpenseController::class, "listByWeek"]);
+       Route::post('/add_update/{id?}',  [ExpenseController::class, "addOrUpdate"]);
+       Route::post('/delete', [ExpenseController::class, "delete"]);
+});
 
 
 

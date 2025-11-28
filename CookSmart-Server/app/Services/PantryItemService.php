@@ -7,15 +7,13 @@ use App\Models\Ingredient;
 
 class PantryItemService
 {
-    public static function listByHousehold($household_id)
-    {
+    public static function listByHousehold($household_id) {
         return PantryItem::where('household_id', $household_id)
             ->with('ingredient')
             ->get();
     }
 
-    public static function addOrUpdate($data, $id = "add")
-    {
+    public static function addOrUpdate($data, $id = "add")  {
        if ($id === "add") {
          $item = new PantryItem;
         } else {
@@ -42,8 +40,7 @@ class PantryItemService
         return $item;
     }
 
-    public static function remove($id)
-    {
+    public static function remove($id){
         $item = PantryItem::find($id);
         if (!$item) return null;
 
@@ -51,8 +48,7 @@ class PantryItemService
         return true;
     }
 
-    public static function increase($id, $amount)
-    {
+    public static function increase($id, $amount) {
         $item = PantryItem::find($id);
         if (!$item) return null;
 
@@ -61,8 +57,7 @@ class PantryItemService
         return $item;
     }
 
-    public static function decrease($id, $amount)
-    {
+    public static function decrease($id, $amount){
         $item = PantryItem::find($id);
         if (!$item) return null;
 

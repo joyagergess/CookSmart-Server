@@ -6,16 +6,14 @@ use App\Models\User;
 
 class UserService
 {
-    public static function getUsers($id = null)
-    {
+    public static function getUsers($id = null){
         if (!$id) {
             return User::all();
         }
         return User::find($id);
     }
 
-    public static function createOrUpdate($data, $id = "add")
-    {
+    public static function createOrUpdate($data, $id = "add"){
         if ($id === "add") {
             $user = new User;
             $user->user_type_id = 2;
