@@ -71,6 +71,7 @@ class PantryItemService
     public static function expiringSoon($household_id, $days = 5)
     {
         return PantryItem::where('household_id', $household_id)
+            ->with('ingredient')
             ->whereDate('expiry_date', '<=', now()->addDays($days))
             ->orderBy('expiry_date')
             ->get();

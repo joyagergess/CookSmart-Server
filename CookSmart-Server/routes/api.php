@@ -1,6 +1,7 @@
 <?php use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserTypeController;
 use App\Http\Controllers\User\HouseholdController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\User\ShoppingListItemController;
 use App\Http\Controllers\User\ShoppingListController;
 use App\Http\Controllers\User\ExpenseController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AiController;
 
 use App\Http\Controllers\Admin\UserController as UserAdminController;
 
@@ -126,3 +128,5 @@ Route::group(["prefix" => "v0.1", "middleware" => "auth:api"], function(){
 
      });
 });
+
+    Route::post('/system/expiring', [AiController::class, 'expiringSoon']);
