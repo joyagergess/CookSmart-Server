@@ -9,15 +9,11 @@ class AuthController extends Controller
 {
     protected $authService;
 
-    public function __construct(AuthService $authService)
-    {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
-
+    public function __construct(AuthService $authService) {
         $this->authService = $authService;
     }
 
-    public function login(Request $request)
-    {
+    public function login(Request $request){
         $request->validate([
             'email'    => 'required|string|email',
             'password' => 'required|string',
@@ -34,8 +30,7 @@ class AuthController extends Controller
         return $this->responseJSON($result);
     }
 
-    public function register(Request $request)
-    {
+    public function register(Request $request){
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
@@ -47,15 +42,19 @@ class AuthController extends Controller
         return $this->responseJSON($result);
     }
 
-    public function logout()
-    {
+    public function logout(){
         $result = $this->authService->logout();
         return $this->responseJSON($result);
     }
 
-    public function refresh()
-    {
+    public function refresh(){
         $result = $this->authService->refresh();
         return $this->responseJSON($result);
     }
+
+    public function me(){
+    $result = $this->authService->me();
+    return $this->responseJSON($result);
+    }
+
 }

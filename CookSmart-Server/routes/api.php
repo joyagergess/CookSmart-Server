@@ -13,11 +13,24 @@ use App\Http\Controllers\User\MealPlanEntryController;
 use App\Http\Controllers\User\ShoppingListItemController;
 use App\Http\Controllers\User\ShoppingListController;
 use App\Http\Controllers\User\ExpenseController;
+use App\Http\Controllers\AuthController;
+
 
 
 use App\Http\Controllers\Admin\UserController as UserAdminController;
 
-Route::group(["prefix" => "v0.1"], function(){
+Route::group(["prefix" => "v0.1"], function () {
+
+    Route::post('/login',    [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
+
+
+
+});
+
+Route::group(["prefix" => "v0.1", "middleware" => "auth:api"], function(){
 
     Route::group(["prefix" => "user"], function(){
         Route::get('/users/{id?}', [UserController::class, "getAllUsers"]);

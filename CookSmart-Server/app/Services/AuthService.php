@@ -8,8 +8,7 @@ use App\Models\User;
 
 class AuthService
 {
-    public function login(array $credentials)
-    {
+    public function login(array $credentials) {
         $token = Auth::attempt($credentials);
 
         if (! $token) {
@@ -23,8 +22,7 @@ class AuthService
         ];
     }
 
-    public function register(array $data)
-    {
+    public function register(array $data) {
         $user = User::create([
             "name"     => $data["name"],
             "email"    => $data["email"],
@@ -40,8 +38,7 @@ class AuthService
         ];
     }
 
-    public function logout()
-    {
+    public function logout(){
         Auth::logout();
 
         return [
@@ -49,12 +46,16 @@ class AuthService
         ];
     }
 
-    public function refresh()
-    {
+    public function refresh() {
         return [
             "user"  => Auth::user(),
             "token" => Auth::refresh(),
             "type"  => "bearer"
         ];
     }
+
+    public function me(){
+    return Auth::user();
+   }
+
 }
