@@ -92,6 +92,10 @@ class HouseholdMemberService
                               ->with('user')  
                               ->get();
     }
+   
+    public static function getAll(){
+    return \App\Models\HouseholdMember::with('user', 'household')->get();
+  }
 
 
 

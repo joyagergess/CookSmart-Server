@@ -117,6 +117,12 @@ Route::group(["prefix" => "v0.1", "middleware" => "auth:api"], function(){
 
 
     Route::group(["prefix" => "admin", "middleware" => "isAdmin"], function () {
+      Route::get('/users', [UserAdminController::class, "getAllUsers"]);
       Route::post('/delete_users', [UserAdminController::class, "deleteUser"]);
+      Route::get('/households', [UserAdminController::class, "getAllHouseholds"]);
+      Route::get('/household_members', [UserAdminController::class, "getAllHouseholdMembers"]);
+      Route::post('/delete_household', [UserAdminController::class, "deleteHousehold"]);
+      Route::post('/delete_household_member', [UserAdminController::class, "deleteHouseholdMember"]);
+
      });
 });
