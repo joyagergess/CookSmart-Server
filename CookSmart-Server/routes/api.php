@@ -100,7 +100,7 @@ Route::group(["prefix" => "v0.1"], function(){
        Route::get('/week/{household_id}/{week_start}',[ExpenseController::class, "listByWeek"]);
        Route::post('/add_update/{id?}',  [ExpenseController::class, "addOrUpdate"]);
        Route::post('/delete', [ExpenseController::class, "delete"]);
-});
+    });
 
 
 
