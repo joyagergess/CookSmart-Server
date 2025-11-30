@@ -96,6 +96,33 @@ class PantryItemService
             ];
         });
       }
-
-
+      
+    public static function expiryDashboard($household_id, $days = 7){
+        $items = PantryItem::where('household_id', $household_id)
+            ->with('ingredient')
+            ->where('expiry_date', '<=', now()->addDays($days))   
+            ->orderBy('expiry_date', 'asc')
+            ->get();
+    
+        return $items->map(function ($item) {
+    
+            $daysLeft = now()->diffInDays($item->expiry_date, false);
+    
+            $badge = 
+                $daysLeft <= 0 ? "EXPIRED" :
+                ($daysLeft <= 2 ? "USE FIRST" :
+                ($daysLeft <= 5 ? "EXPIRING SOON" : "NORMAL"));
+    
+            return [
+                "id"        => $item->id,
+                "name"      => $item->ingredient->name,
+                "quantity"  => $item->quantity,
+                "unit"      => $item->unit,
+                "expiry"    => $item->expiry_date,
+                "days_left" => $daysLeft,
+                "badge"     => $badge
+            ];
+        });
+    }
+    
 }

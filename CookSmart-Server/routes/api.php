@@ -78,6 +78,8 @@ Route::group(["prefix" => "v0.1", "middleware" => "auth:api"], function(){
     
         Route::get('/expiring_soon/{household_id}', [PantryItemController::class, "expiringSoon"]);
         Route::get('/low_quantity/{household_id}', [PantryItemController::class, "lowQuantity"]);
+        Route::get('/expiry-dashboard/{household_id}', [PantryItemController::class, "expiryDashboard"]);
+
     });
 
     Route::group(["prefix" => "recipes"], function () {

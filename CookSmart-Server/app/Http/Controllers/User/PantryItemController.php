@@ -47,4 +47,12 @@ class PantryItemController extends Controller{
             PantryService::lowQuantity($household_id)
         );
     }
+
+
+    public function expiryDashboard($household_id){
+    $result = \App\Services\PantryItemService::expiryDashboard($household_id);
+
+    return $this->responseJSON($result);
+   }
+
 }
