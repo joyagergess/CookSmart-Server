@@ -71,33 +71,75 @@ class AiService
         return (new OpenAIService)->messageOnly($prompt);
     }
 
+public static function weeklySummary($household_id)
+{
+    $expenses = ExpenseService::lastWeek($household_id);
+    $expiring = PantryItemService::expiringSoon($household_id, 5);
+    $shopping = ShoppingListItemService::activity($household_id);
 
-    public static function weeklySummary($household_id)
+    $prompt = "
+        Provide a VERY short weekly household summary based on the data below.
+        Output ONLY plain text in ONE small paragraph. 
+        Do NOT use bullet points, newlines, slashes, or any formatting.
+
+        Expenses last week: {$expenses->toJson()}
+        Items expiring soon: {$expiring->toJson()}
+        Shopping list activity: {$shopping->toJson()}
+
+        Include in the same short paragraph:
+        - Spending patterns
+        - Waste reduction ideas
+        - Budget advice
+        - Pantry usage insights
+        Keep it friendly and simple, like you're advising a normal person.
+     ";
+
+    return (new OpenAIService)->messageOnly($prompt);
+   }
+
+
+
+    public static function recipeNutrition($recipe_id){
+    $ingredients = RecipeService::listIngredients($recipe_id);
+
+    if ($ingredients->isEmpty()) {
+        return "No ingredients found for this recipe.";
+    }
+
+    $list = [];
+
+    foreach ($ingredients as $item) {
+        $list[] = [
+            "name" => $item->ingredient->name,
+            "amount" => $item->amount,
+            "unit" => $item->unit
+        ];
+    }
+
+    $prompt = "
+    You are a nutrition expert.
+    
+    Given these ingredients with amounts:
+    
+    " . json_encode($list, JSON_PRETTY_PRINT) . "
+    
+    Return nutrition facts in EXACTLY this JSON format:
+    
     {
-        $expenses = ExpenseService::lastWeek($household_id);
-        $expiring = PantryItemService::expiringSoon($household_id, 5);
-        $shopping = ShoppingListItemService::activity($household_id);
-
-        $prompt = "
-            Create a short, useful weekly household summary.
-
-            EXPENSES (last 7 days):
-            {$expenses->toJson()}
-
-            EXPIRING SOON:
-            {$expiring->toJson()}
-
-            SHOPPING LIST ACTIVITY:
-            {$shopping->toJson()}
-
-            Include:
-            - Spending patterns
-            - Waste reduction ideas
-            - Budget advice
-            - Pantry usage insights
-            - 2-3 suggested meals for next week
-        ";
-
+      \"total_calories\": number,
+      \"total_protein\": number,
+      \"total_carbs\": number,
+      \"total_fat\": number,
+      \"per_ingredient\": [
+          { \"name\": \"...\", \"calories\": number, \"protein\": number, \"carbs\": number, \"fat\": number }
+      ]
+    }
+    
+    Do NOT add explanations. ONLY return JSON.
+    ";
+    
         return (new OpenAIService)->messageOnly($prompt);
     }
-}
+    
+    }
+    

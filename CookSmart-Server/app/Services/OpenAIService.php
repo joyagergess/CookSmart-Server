@@ -58,15 +58,17 @@ class OpenAIService
         ];
     }
 
-   
-    public function messageOnly($prompt)
-    {
-        $response = $this->chat($prompt);
+    public function messageOnly($prompt){
+     $response = $this->chat($prompt);
 
-        if (isset($response['content'])) {
-            return $response['content'];
-        }
+     if (!isset($response['content'])) {
+         return "AI error: no content returned.";
+     }
 
-        return "AI error: no content returned.";
-    }
+     $clean = str_replace("\\n", "\n", $response['content']);
+     $clean = preg_replace('/```(.*?)```/s', '$1', $clean);
+     return $clean;
+   }
+
+
 }

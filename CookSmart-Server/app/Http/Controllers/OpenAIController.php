@@ -9,8 +9,9 @@ class OpenAIController extends Controller
 {
     public function pantryRecipes(Request $request)
     {
-        $request->validate(['household_id' => 'required|integer']);
-        return response()->json(AiService::pantryRecipes($request->household_id));
+        return $this->responseJSON(
+            AiService::pantryRecipes($request->household_id)
+        );
     }
 
     public function substitutions(Request $request)
@@ -20,14 +21,22 @@ class OpenAIController extends Controller
             'household_id' => 'required|integer'
         ]);
 
-        return response()->json(
+        return $this->responseJSON(
             AiService::substitutions($request->recipe_id, $request->household_id)
         );
     }
 
     public function weeklySummary(Request $request)
     {
-        $request->validate(['household_id' => 'required|integer']);
-        return response()->json(AiService::weeklySummary($request->household_id));
+        return $this->responseJSON(
+            AiService::weeklySummary($request->household_id)
+        );
+    }
+
+    public function recipeNutrition(Request $request)
+    {
+        return $this->responseJSON(
+            AiService::recipeNutrition($request->recipe_id)
+        );
     }
 }
