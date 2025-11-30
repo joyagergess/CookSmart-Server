@@ -1,31 +1,31 @@
-Backend API for managing pantry items, recipes, meal plans, shopping lists, expenses, and AI features.
+This project is the backend API for Smart Pantry & Meal Planner, an app designed to help households manage food, plan meals, reduce waste, and track spending. It provides all server-side logic for pantry inventory, recipes, shopping lists, meal plans, budgets, and AI-powered suggestions.
 
-🚀 Features
+🚀 What This Backend Does
 
-Auth (register/login, JWT)
+Authentication & Households
+Users can register/login and join shared households using an invite code.
 
-Households + roles
+Pantry Management
+CRUD ingredients, quantities, units, expiry dates, and track items that are expiring soon.
 
-Pantry CRUD + expiry tracking
+Recipes & Ingredients
+Create recipes with ingredient lists and instructions.
 
-Recipes + ingredients
+Weekly Meal Planning
+Build weekly plans with meals per day/slot.
 
-Weekly meal planning
+Smart Shopping Lists
+Auto-generate lists based on recipes vs pantry stock.
 
-Shopping lists (auto-generate missing ingredients)
+Expenses / Budget Tracking
+Log grocery expenses and see weekly totals.
 
-Expenses & budget tracking
+AI Features
 
-AI:
+“Cook from my pantry” recipe ideas
 
-Cook-from-my-pantry recipes
+Smart ingredient substitutions
 
-Ingredient substitutions
+Weekly household insight summary
 
-Weekly insights
-
-Recipe nutrition
-
-📡 Tech
-
-Laravel · MySQL · JWT · OpenAI · n8n Automation
+Recipe nutrition analysis
