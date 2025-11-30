@@ -29,3 +29,7 @@ Smart ingredient substitutions
 Weekly household insight summary
 
 Recipe nutrition analysis
+
+🛠 Tech Stack
+
+Laravel · MySQL · JWT Auth · OpenAI API 
