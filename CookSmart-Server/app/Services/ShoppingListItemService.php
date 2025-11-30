@@ -38,4 +38,23 @@ class ShoppingListItemService{
 
         return $item;
     }
+
+    public static function activity($household_id){
+     $list = ShoppingListService::list($household_id);
+
+     if (!$list || $list->items->isEmpty()) {
+        return collect([]);
+     }
+
+     return $list->items->map(function ($item) {
+        return [
+            'name'      => $item->ingredient->name,
+            'quantity'  => $item->quantity_needed,
+            'unit'      => $item->unit,
+            'is_bought' => $item->is_bought,
+        ];
+     });
+   }
+
+
 }

@@ -1,4 +1,5 @@
-<?php use Illuminate\Http\Request;
+<?php use
+ Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,6 +17,9 @@ use App\Http\Controllers\User\ShoppingListController;
 use App\Http\Controllers\User\ExpenseController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AiController;
+use App\Http\Controllers\OpenAIController;
+
+
 
 use App\Http\Controllers\Admin\UserController as UserAdminController;
 
@@ -127,6 +131,16 @@ Route::group(["prefix" => "v0.1", "middleware" => "auth:api"], function(){
       Route::post('/delete_household_member', [UserAdminController::class, "deleteHouseholdMember"]);
 
      });
+
+ 
 });
+     Route::group(["prefix" => "ai"], function () {
+        Route::post('/pantry-recipes', [OpenAIController::class, 'pantryRecipes']);
+        Route::post('/substitutions', [OpenAIController::class, 'substitutions']);
+        Route::post('/weekly-summary', [OpenAIController::class, 'weeklySummary']);
+    });
 
     Route::post('/system/expiring', [AiController::class, 'expiringSoon']);
+
+
+   

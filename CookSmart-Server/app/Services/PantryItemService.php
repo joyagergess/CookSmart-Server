@@ -83,4 +83,19 @@ class PantryItemService
             ->where('quantity', '<', 4)
             ->get();
     }
+
+    public static function listForAI($household_id){
+    return PantryItem::where('household_id', $household_id)
+        ->with('ingredient:id,name')
+        ->get()
+        ->map(function ($item) {
+            return [
+                'name' => $item->ingredient->name,
+                'quantity' => $item->quantity,
+                'unit' => $item->unit
+            ];
+        });
+      }
+
+
 }

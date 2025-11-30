@@ -2,6 +2,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Ingredient;
+use App\Models\ShoppingList;
 
 class ShoppingListItem extends Model
 {
@@ -17,4 +19,9 @@ class ShoppingListItem extends Model
     {
         return $this->belongsTo(Ingredient::class);
     }
-}
+    
+    public function shoppingList(){
+    return $this->belongsTo(ShoppingList::class, 'shopping_list_id');
+     }
+
+ }

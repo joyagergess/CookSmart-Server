@@ -51,4 +51,13 @@ class ExpenseService
             ->orderBy('date', 'asc')
             ->get();
     }
+
+
+    public static function lastWeek($household_id){
+    return Expense::where('household_id', $household_id)
+        ->where('date', '>=', now()->subDays(7))
+        ->orderBy('date', 'desc')
+        ->get();
+      }
+
 }
