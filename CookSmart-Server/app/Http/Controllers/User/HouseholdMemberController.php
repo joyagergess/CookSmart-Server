@@ -7,7 +7,7 @@ use App\Services\HouseholdMemberService;
 class HouseholdMemberController extends Controller{
     public function join(Request $request)
     {
-        $result = HouseholdMemberService::joinWithInvite($request->user_id, $request->invite_code);
+        $result = HouseholdMemberService::joinWithInvite( $request->invite_code);
         return $this->responseJSON($result);
     }
 

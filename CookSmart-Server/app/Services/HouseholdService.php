@@ -33,14 +33,13 @@ class HouseholdService
 
     $household->save();
 
-    if ($id === "add" && isset($data['user_id'])) {
-
-        $member = new HouseholdMember;
-        $member->household_id = $household->id;
-        $member->user_id = $data['user_id'];
-        $member->joined_at = now();
-        $member->save();
-    }
+     if ($id === "add") {
+         $member = new HouseholdMember();
+         $member->household_id = $household->id;
+         $member->user_id = auth()->id();  
+         $member->joined_at = now();
+         $member->save();
+        }
 
     return $household;
     }

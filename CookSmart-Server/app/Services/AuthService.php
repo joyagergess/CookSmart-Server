@@ -54,8 +54,22 @@ class AuthService
         ];
     }
 
-    public function me(){
-    return Auth::user();
-   }
+   public function me() {
+    $user = Auth::user();
+
+    $memberships = \DB::table('household_members')
+        ->where('user_id', $user->id)
+        ->get();
+
+    $householdIds = $memberships->pluck('household_id')->toArray();
+
+      return [
+        "id" => $user->id,
+        "name" => $user->name,
+        "email" => $user->email,
+        "households" => $householdIds, 
+     ];
+  }
+
 
 }
