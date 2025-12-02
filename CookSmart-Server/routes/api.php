@@ -135,7 +135,6 @@ Route::group(["prefix" => "v0.1", "middleware" => "auth:api"], function(){
      });
 
  
-});
      Route::group(["prefix" => "ai"], function () {
         Route::post('/pantry-recipes', [OpenAIController::class, 'pantryRecipes']);
         Route::post('/substitutions', [OpenAIController::class, 'substitutions']);
@@ -143,6 +142,7 @@ Route::group(["prefix" => "v0.1", "middleware" => "auth:api"], function(){
         Route::post('/nutrition/recipe', [OpenAIController::class, 'recipeNutrition']);
 
     });
+});
 
     Route::post('/system/expiring', [AiController::class, 'expiringSoon']);
 

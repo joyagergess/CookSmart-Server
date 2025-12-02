@@ -19,32 +19,37 @@ class HouseholdService
 
     public static function createOrUpdate($data, $id = "add"){
 
-    if ($id === "add") {
-        $household = new Household;
-
-        $household->invite_code = strtoupper(Str::random(6));
-    } 
-    else {
-        $household = Household::find($id);
-        if (!$household) return null;
-    }
-
-    $household->name = $data['name'];
-
-    $household->save();
-
-     if ($id === "add") {
-         $member = new HouseholdMember();
-         $member->household_id = $household->id;
-         $member->user_id = auth()->id();  
-         $member->joined_at = now();
-         $member->save();
-        }
-
-    return $household;
-    }
-
-
+       if ($id === "add") {
+   
+           $household = new Household;
+           $household->invite_code = strtoupper(Str::random(6)); 
+       } 
+       else {
+           $household = Household::find($id);
+           if (!$household) return null;
+       }
+   
+       if (isset($data['name'])) {
+           $household->name = $data['name'];
+       }
+   
+       if (isset($data['invite_code'])) {
+           $household->invite_code = $data['invite_code'];
+       }
+   
+       $household->save();
+   
+       if ($id === "add") {
+           $member = new HouseholdMember();
+           $member->household_id = $household->id;
+           $member->user_id = auth()->id();
+           $member->joined_at = now();
+           $member->save();
+       }
+   
+       return $household;
+      }   
+ 
 
     public static function deleteHousehold($id)
     {
