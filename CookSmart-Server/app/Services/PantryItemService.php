@@ -122,7 +122,7 @@ class PantryItemService
                 "days_left" => $daysLeft,
                 "badge"     => $badge
             ];
-        });
-    }
+         });
+       }
     
-}
+      }
