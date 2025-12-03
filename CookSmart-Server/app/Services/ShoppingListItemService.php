@@ -50,7 +50,7 @@ class ShoppingListItemService{
             $existing->save();
         } else {
            
-            \App\Models\PantryItem::create([
+                PantryItem::create([
                 'household_id' => $householdId,
                 'ingredient_id' => $item->ingredient_id,
                 'quantity'     => $item->quantity_needed,
